@@ -18,7 +18,7 @@ TODO
 
 ## Inspirations
 
-This package is heaviliy inspired by:
+This package is heavily inspired by:
 
 https://github.com/chendaniely/pyprojroot
 
