@@ -50,6 +50,11 @@ pyrootutils.set_root(
     project_root_env_var=True, # set the PROJECT_ROOT environment variable to root directory
     dotenv=True, # load environment variables from .env if exists in root directory
 )
+```
+
+```python
+import pyrootutils
+
 
 # combines get_root() and set_root() into one method
 root = pyrootutils.setup_root(
