@@ -27,7 +27,7 @@ jobs:
 
       - name: Run tests
         run: |
-          python pytest
+          pytest -v
 
   pre-commit:
     runs-on: ubuntu-latest
