@@ -1,5 +1,6 @@
-from pyrootutils import get_from_root, get_root, set_root, setup_root
 from pathlib import Path
+
+from pyrootutils import get_from_root, get_root, set_root, setup_root
 
 
 def test_pyrootutils():

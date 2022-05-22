@@ -54,7 +54,7 @@ def get_root(
     if not isinstance(indicator, str) and not hasattr(indicator, "__iter__"):
         raise TypeError("indicator must be a string or list of strings.")
 
-    search_from = Path(search_from)
+    search_from = Path(search_from).resolve()
 
     if not search_from.exists():
         raise FileNotFoundError("search_from path does not exist.")
