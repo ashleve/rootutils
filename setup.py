@@ -15,6 +15,6 @@ setup(
     url="https://github.com/ashleve/pyrootutils",
     packages=find_packages(),
     python_requires=">=3.7.0",
-    install_requires=[],
+    install_requires=["python-dotenv"],
     tests_require=["pytest"],
 )
