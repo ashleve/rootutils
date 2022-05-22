@@ -2,21 +2,21 @@
 
 [![Tests](https://github.com/ashleve/pyrootutils/actions/workflows/tests.yaml/badge.svg)](https://github.com/ashleve/pyrootutils/actions/workflows/tests.yaml)
 
-A simple python package to solve all of your problems with pythonpath, working directory, file paths, module imports and environment variables.
+A simple python package to solve all your problems with pythonpath, working directory, file paths, module imports and environment variables.
 
 ## Why pyrootutils?
 
 **Problem:** I would like to be able to:
 
-- run my python scripts from anywhere
-- always import python modules relatively to the project root directory
-- always access files relatively to the project root so I don't have to specify a series of `../` to get to the data
-- always have access to environment variables from `.env` file without having to load them manually
-- have all of the above benefits in notebooks even if they're nested in subdirectories
+- Run my python scripts from anywhere
+- Always import python modules relatively to the project root directory
+- Always access files relatively to the project root so I don't have to specify a series of `../` to get to the data
+- Always have access to environment variables from `.env` file without having to load them manually
+- Have all the above benefits in notebooks even if they're nested in subdirectories
 
 **Solution:** The `pyrootutils` package provides a flexible way to setup the python project with a simple one-liner. It finds the project root based on the location of specified file name, e.g. `.project-root` or `.git`.
 
-The package is really tiny and throurougly tested with continuous integration, so you can use it safely without worrying it gets deprecated.
+The package is tiny and continuosly maintained, so you can use it without worrying it gets deprecated in the future.
 
 ## Setup
 
