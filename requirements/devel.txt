@@ -1,3 +1,0 @@
-pytest
-pre-commit
-python-dotenv

@@ -1,0 +1,11 @@
+# Basic dependabot.yml file with
+# minimum configuration for two package managers
+
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    # Look in the `root` directory
+    directory: "/"
+    # Check the pip registry for updates every day (weekdays)
+    schedule:
+      interval: "daily"
