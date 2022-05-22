@@ -1,8 +1,10 @@
-from pathlib import Path
-import pytest
-from pyrootutils import get_root, set_root, setup_root
 import os
 import sys
+from pathlib import Path
+
+import pytest
+
+from pyrootutils import get_root, set_root, setup_root
 
 
 def test_pyrootutils():
