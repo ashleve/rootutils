@@ -14,7 +14,7 @@ def _pyrootutils_recursive_search(path: Path, indicators: Iterable[str]) -> Path
         indicators (Iterable[str]): list of filenames to search for.
 
     Raises:
-        FileNotFoundError: if no file is found.
+        FileNotFoundError: if root is not found.
 
     Returns:
         Path: path to folder containing at list one of the files from the list.
@@ -41,26 +41,25 @@ def get_root(
         indicator (Union[str, Iterable[str]], optional): _description_. Defaults to ".project-root".
 
     Raises:
-        TypeError: _description_
-        TypeError: _description_
-        FileNotFoundError: _description_
+        TypeError: if any input type is incorrect.
+        FileNotFoundError: if root is not found.
 
     Returns:
         Path: path to project root.
     """
-    if not isinstance(search_from, str) and not isinstance(search_from, Path):
+    if not isinstance(search_from, (str, Path)):
         raise TypeError("search_from must be either a string or pathlib object.")
 
-    if not isinstance(indicator, str) and not hasattr(indicator, "__iter__"):
-        raise TypeError("indicator must be a string or list of strings.")
-
     search_from = Path(search_from).resolve()
+
+    if isinstance(indicator, str):
+        indicator = [indicator]
 
     if not search_from.exists():
         raise FileNotFoundError("search_from path does not exist.")
 
-    if isinstance(indicator, str):
-        indicator = [indicator]
+    if not hasattr(indicator, "__iter__") or not all(isinstance(i, str) for i in indicator):
+        raise TypeError("indicator must be a string or list of strings.")
 
     path = _pyrootutils_recursive_search(search_from, indicator)
 
@@ -141,11 +140,3 @@ def setup_root(
     path = get_root(search_from, indicator)
     set_root(path, pythonpath, cwd, project_root_env_var, dotenv)
     return path
-
-
-def get_from_root(
-    search_from: str,
-    indicator: Union[str, Iterable[str]] = ".project-root",
-    filepath: str = "",
-) -> Path:
-    pass
