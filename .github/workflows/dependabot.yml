@@ -4,8 +4,6 @@
 version: 2
 updates:
   - package-ecosystem: "pip"
-    # Look in the `root` directory
     directory: "/"
-    # Check the pip registry for updates every day (weekdays)
     schedule:
       interval: "daily"
