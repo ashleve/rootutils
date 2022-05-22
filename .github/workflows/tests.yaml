@@ -25,6 +25,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements/devel.txt
 
+      - name: List dependencies
+        run: |
+          python -m pip list
+
       - name: Run tests
         run: |
           pytest -v
@@ -36,3 +40,10 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - uses: pre-commit/action@v2.0.3
+
+  misspell-fixer-action:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: sobolevn/misspell-fixer-action@master

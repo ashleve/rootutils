@@ -1,5 +1,7 @@
 # pyrootutils
 
+[![Tests](https://github.com/ashleve/pyrootutils/actions/workflows/tests.yaml/badge.svg)](https://github.com/ashleve/pyrootutils/actions/workflows/tests.yaml)
+
 A simple python package to solve all of your problems with pythonpath, working directory, file paths and module imports.
 
 ## What is pyrootutils?
