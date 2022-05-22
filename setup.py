@@ -6,16 +6,17 @@ with open("README.md") as f:
 
 setup(
     name="pyrootutils",
-    version="0.0.0",
+    version="1.0.0",
     license="MIT",
-    description="A simple python package to solve all of your problems with pythonpath, working directory, file paths and module imports.",
+    description="Simple package for setting up the root of the project.",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    url="https://github.com/ashleve/pyrootutils",
     author="ashleve",
     author_email="ashlevegalaxy@gmail.com",
-    url="https://github.com/ashleve/pyrootutils",
     packages=find_packages(),
     python_requires=">=3.7.0",
+    include_package_data=True,
     install_requires=["python-dotenv"],
     tests_require=["pytest"],
 )
