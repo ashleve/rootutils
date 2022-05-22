@@ -2,23 +2,28 @@ name: Tests
 
 on:
   push:
-    branches: [main]
+    branches: [$default-branch]
   pull_request:
-    branches: [main]
+    branches: [$default-branch]
 
 jobs:
   run_tests:
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
 
     timeout-minutes: 5
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up python 3.10
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
         with:
-          python-version: "3.10"
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         run: |
@@ -29,10 +34,11 @@ jobs:
         run: |
           python -m pip list
 
-      - name: Run tests
+      - name: Run tests with pytest
         run: |
           pytest -v
 
+  # check code formatting
   pre-commit:
     runs-on: ubuntu-latest
 
@@ -41,7 +47,8 @@ jobs:
       - uses: actions/setup-python@v2
       - uses: pre-commit/action@v2.0.3
 
-  misspell-fixer-action:
+  # check common spelling mistakes
+  misspell-fixer:
     runs-on: ubuntu-latest
 
     steps:
