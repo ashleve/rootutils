@@ -1,47 +1,142 @@
+import os
+import sys
 from pathlib import Path
 from typing import Iterable, Union
 
-
-class ProjectRootNotFoundError(Exception):
-    def __init__(self, message: str):
-        super().__init__(message)
+from dotenv import load_dotenv
 
 
-def _pyrootutils_recursive_search(path: str, indicator: Union[str, Iterable[str]]) -> Path:
-    pass
+def _pyrootutils_recursive_search(path: Path, indicators: Iterable[str]) -> Path:
+    """Recursively search for files from the `indicators` list, starting from given path.
+
+    Args:
+        path (Path): starting folder path.
+        indicators (Iterable[str]): list of filenames to search for.
+
+    Raises:
+        FileNotFoundError: if root is not found.
+
+    Returns:
+        Path: path to folder containing at list one of the files from the list.
+    """
+    for file in indicators:
+        found = list(path.glob(file))
+        if len(found) > 0:
+            return path
+
+    if path.parent == path:
+        raise FileNotFoundError("Project root directory not found.")
+
+    return _pyrootutils_recursive_search(path.parent, indicators)
 
 
-def get_root(search_from: str, indicator: Union[str, Iterable[str]] = ".project-root") -> Path:
-    pass
-
-
-def set_root(
-    path: str,
-    pythonpath: bool = True,
-    cwd: bool = True,
-    project_root_env_var: bool = True,
-    dotenv: bool = True,
-):
-    pass
-
-
-def setup_root(
-    search_from: str,
+def get_root(
+    search_from: Union[str, Path],
     indicator: Union[str, Iterable[str]] = ".project-root",
-    pythonpath: bool = True,
-    cwd: bool = True,
-    project_root_env_var: bool = True,
-    dotenv: bool = True,
-):
-    """Combines `get_root()` and `set_root()` into one method."""
-    path = get_root(search_from, indicator)
-    set_root(path, pythonpath, cwd, project_root_env_var, dotenv)
+) -> Path:
+    """Recursively searches for project root indicator(s), starting from given path.
+
+    Args:
+        search_from (str): path to folder to start search from.
+        indicator (Union[str, Iterable[str]], optional): _description_. Defaults to ".project-root".
+
+    Raises:
+        TypeError: if any input type is incorrect.
+        FileNotFoundError: if root is not found.
+
+    Returns:
+        Path: path to project root.
+    """
+    if not isinstance(search_from, (str, Path)):
+        raise TypeError("search_from must be either a string or pathlib object.")
+
+    search_from = Path(search_from).resolve()
+
+    if isinstance(indicator, str):
+        indicator = [indicator]
+
+    if not search_from.exists():
+        raise FileNotFoundError("search_from path does not exist.")
+
+    if not hasattr(indicator, "__iter__") or not all(isinstance(i, str) for i in indicator):
+        raise TypeError("indicator must be a string or list of strings.")
+
+    path = _pyrootutils_recursive_search(search_from, indicator)
+
+    if not path.exists():
+        raise FileNotFoundError("Project root directory not found.")
+
     return path
 
 
-def get_from_root(
-    search_from: str,
+def set_root(
+    path: Union[str, Path],
+    pythonpath: bool = True,
+    cwd: bool = True,
+    project_root_env_var: bool = True,
+    dotenv: bool = True,
+) -> None:
+    """Set given path as a project root.
+
+    Args:
+        path (Union[str, Path]): project root path.
+        pythonpath (bool, optional): whether to add project root to pythonpath.
+        cwd (bool, optional): whether to set current working directory to project root.
+        project_root_env_var (bool, optional): whether to set PROJECT_ROOT environment variable to project root.
+        dotenv (bool, optional): whether to load .env file from project root.
+
+    Raises:
+        FileNotFoundError: if root path does not exist.
+        Exception: if all options are False.
+
+    Returns:
+        None
+    """
+    path = str(path)
+
+    if not os.path.exists(path):
+        raise FileNotFoundError("Project root path does not exist.")
+
+    if not pythonpath and not cwd and not project_root_env_var and not dotenv:
+        raise Exception(
+            "No options selected. \
+            <pythonpath=False>, <cwd=False>, <project_root_env_var=False>, <dotenv=False>."
+        )
+
+    if pythonpath:
+        sys.path.insert(0, path)
+
+    if cwd:
+        os.chdir(path)
+
+    if project_root_env_var:
+        os.environ["PROJECT_ROOT"] = path
+
+    if dotenv:
+        load_dotenv(os.path.join(path, ".env"))
+
+
+def setup_root(
+    search_from: Union[str, Path],
     indicator: Union[str, Iterable[str]] = ".project-root",
-    filepath: str = "",
+    pythonpath: bool = True,
+    cwd: bool = True,
+    project_root_env_var: bool = True,
+    dotenv: bool = True,
 ) -> Path:
-    pass
+    """Combines `get_root()` and `set_root()` into one method.
+
+    Args:
+        search_from (str): path to folder to start search from.
+        indicator (Union[str, Iterable[str]], optional): Project root indicator(s). Defaults to ".project-root".
+        pythonpath (bool, optional): whether to add project root to pythonpath.
+        cwd (bool, optional): whether to set current working directory to project root.
+        project_root_env_var (bool, optional): whether to set PROJECT_ROOT environment variable to project root.
+        dotenv (bool, optional): whether to load .env file from project root.
+
+    Returns:
+        Path: path to project root.
+    """
+    path = get_root(search_from, indicator)
+    set_root(path, pythonpath, cwd, project_root_env_var, dotenv)
+    return path
