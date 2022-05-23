@@ -38,10 +38,10 @@ import pyrootutils
 # find absolute root path (searches for directory containing .project-root file)
 # search starts from current file and recursively goes over parent directories
 # returns pathlib object
-path = pyrootutils.get_root(search_from=__file__, indicator=".project-root")
+path = pyrootutils.find_root(search_from=__file__, indicator=".project-root")
 
 # find absolute root path (searches for directory containing any of the files on the list)
-path = pyrootutils.get_root(search_from=__file__, indicator=[".git", "setup.cfg"])
+path = pyrootutils.find_root(search_from=__file__, indicator=[".git", "setup.cfg"])
 
 # take advantage of the pathlib syntax
 data_dir = path / "data"
@@ -61,7 +61,7 @@ pyrootutils.set_root(
 import pyrootutils
 
 
-# combines get_root() and set_root() into one method
+# combines find_root() and set_root() into one method
 root = pyrootutils.setup_root(
     search_from=__file__,
     indicator=".git" # indicator of the root directory

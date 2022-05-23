@@ -30,8 +30,8 @@ def _pyrootutils_recursive_search(path: Path, indicators: Iterable[str]) -> Path
     return _pyrootutils_recursive_search(path.parent, indicators)
 
 
-def get_root(
-    search_from: Union[str, Path],
+def find_root(
+    search_from: Union[str, Path] = ".",
     indicator: Union[str, Iterable[str]] = ".project-root",
 ) -> Path:
     """Recursively searches for project root indicator(s), starting from given path.
@@ -87,7 +87,6 @@ def set_root(
 
     Raises:
         FileNotFoundError: if root path does not exist.
-        Exception: if all options are False.
 
     Returns:
         None
@@ -96,12 +95,6 @@ def set_root(
 
     if not os.path.exists(path):
         raise FileNotFoundError("Project root path does not exist.")
-
-    if not pythonpath and not cwd and not project_root_env_var and not dotenv:
-        raise Exception(
-            "No options selected. \
-            <pythonpath=False>, <cwd=False>, <project_root_env_var=False>, <dotenv=False>."
-        )
 
     if pythonpath:
         sys.path.insert(0, path)
@@ -137,6 +130,6 @@ def setup_root(
     Returns:
         Path: path to project root.
     """
-    path = get_root(search_from, indicator)
+    path = find_root(search_from, indicator)
     set_root(path, pythonpath, cwd, project_root_env_var, dotenv)
     return path
