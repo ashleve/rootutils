@@ -1,6 +1,11 @@
 # pyrootutils
 
-[![Tests](https://github.com/ashleve/pyrootutils/actions/workflows/tests.yaml/badge.svg)](https://github.com/ashleve/pyrootutils/actions/workflows/tests.yaml)
+[![Python](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/release/python-370/)
+[![Tests](https://github.com/ashleve/pyrootutils/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/ashleve/pyrootutils/actions/workflows/test.yml)
+[![Issues](https://img.shields.io/github/issues/ashleve/pyrootutils)](https://github.com/ashleve/pyrootutils/issues)
+[![License](https://img.shields.io/github/license/ashleve/pyrootutils)](https://github.com/ashleve/pyrootutils/blob/main/LICENSE)
+[![Release](https://img.shields.io/pypi/v/pyrootutils)](pypi.org/project/pyrootutils/1.0.0/)
+[![PyPi](https://img.shields.io/pypi/dm/pyrootutils)](pypi.org/project/pyrootutils/1.0.0/)
 
 A simple python package to solve all your problems with pythonpath, working directory, file paths, module imports and environment variables.
 
@@ -33,10 +38,10 @@ import pyrootutils
 # find absolute root path (searches for directory containing .project-root file)
 # search starts from current file and recursively goes over parent directories
 # returns pathlib object
-path = pyrootutils.get_root(search_from=__file__, indicator=".project-root")
+path = pyrootutils.find_root(search_from=__file__, indicator=".project-root")
 
 # find absolute root path (searches for directory containing any of the files on the list)
-path = pyrootutils.get_root(search_from=__file__, indicator=[".git", "setup.cfg"])
+path = pyrootutils.find_root(search_from=__file__, indicator=[".git", "setup.cfg"])
 
 # take advantage of the pathlib syntax
 data_dir = path / "data"
@@ -56,7 +61,7 @@ pyrootutils.set_root(
 import pyrootutils
 
 
-# combines get_root() and set_root() into one method
+# combines find_root() and set_root() into one method
 root = pyrootutils.setup_root(
     search_from=__file__,
     indicator=".git" # indicator of the root directory

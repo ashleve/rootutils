@@ -4,63 +4,60 @@ from pathlib import Path
 
 import pytest
 
-from pyrootutils import get_root, set_root, setup_root
+from pyrootutils import find_root, set_root, setup_root
 
 
 def test_pyrootutils():
-    assert get_root
+    assert find_root
     assert set_root
     assert setup_root
 
 
-def test_get_root():
-    path = get_root(__file__)
+def test_find_root():
+    path = find_root(__file__)
     assert path.exists()
 
-    path = get_root(str(__file__))
+    path = find_root(str(__file__))
     assert path.exists()
 
-    path = get_root(Path(__file__))
+    path = find_root(Path(__file__))
     assert path.exists()
 
-    path = get_root(__file__, ".git")
+    path = find_root(__file__, ".git")
     assert path.exists()
 
-    path = get_root(__file__, indicator=[".setup.cfg", "setup.py", "LICENSE"])
+    path = find_root(__file__, indicator=[".setup.cfg", "setup.py", "LICENSE"])
     assert path.exists()
 
-    path = get_root("")
+    path = find_root("")
     assert path.exists()
 
-    path = get_root(".")
+    path = find_root(".")
     assert path.exists()
 
     with pytest.raises(FileNotFoundError):
-        path = get_root(__file__, indicator="abc")
+        path = find_root(__file__, indicator="abc")
 
     with pytest.raises(FileNotFoundError):
-        path = get_root(__file__, indicator=["abc", "def", "fgh"])
+        path = find_root(__file__, indicator=["abc", "def", "fgh"])
 
     with pytest.raises(FileNotFoundError):
-        path = get_root(Path(__file__).parent.parent.parent)
+        path = find_root(Path(__file__).parent.parent.parent)
 
     with pytest.raises(TypeError):
-        path = get_root([])
+        path = find_root([])
 
     with pytest.raises(TypeError):
-        path = get_root("", ["abs", "def", 42])
+        path = find_root("", ["abs", "def", 42])
 
 
 def test_set_root():
 
-    path = get_root(__file__)
+    path = find_root(__file__)
     assert path.exists()
 
     os.chdir(path.parent)
     assert os.getcwd() != str(path)
-
-    with pytest.raises(Exception):
-        set_root(path, pythonpath=False, cwd=False, project_root_env_var=False, dotenv=False)
 
     assert "PROJECT_ROOT" not in os.environ
 
