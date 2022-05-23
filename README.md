@@ -1,6 +1,11 @@
 # pyrootutils
 
-[![Tests](https://github.com/ashleve/pyrootutils/actions/workflows/tests.yaml/badge.svg)](https://github.com/ashleve/pyrootutils/actions/workflows/tests.yaml)
+[![Python](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/release/python-370/)
+[![Tests](https://github.com/ashleve/pyrootutils/actions/workflows/test.yaml/badge.svg)](https://github.com/ashleve/pyrootutils/actions/workflows/test.yaml)
+[![Issues](https://img.shields.io/github/issues/ashleve/pyrootutils)](https://github.com/ashleve/pyrootutils/issues)
+[![License](https://img.shields.io/github/license/ashleve/pyrootutils)](https://github.com/ashleve/pyrootutils/blob/main/LICENSE)
+[![Release](https://img.shields.io/pypi/v/pyrootutils)](pypi.org/project/pyrootutils/1.0.0/)
+[![PyPi](https://img.shields.io/pypi/dm/pyrootutils)](pypi.org/project/pyrootutils/1.0.0/)
 
 A simple python package to solve all your problems with pythonpath, working directory, file paths, module imports and environment variables.
 
