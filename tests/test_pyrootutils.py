@@ -14,6 +14,15 @@ def test_pyrootutils():
 
 
 def test_find_root():
+    path = find_root()
+    assert path.exists()
+
+    path = find_root("")
+    assert path.exists()
+
+    path = find_root(".")
+    assert path.exists()
+
     path = find_root(__file__)
     assert path.exists()
 
@@ -27,12 +36,6 @@ def test_find_root():
     assert path.exists()
 
     path = find_root(__file__, indicator=[".setup.cfg", "setup.py", "LICENSE"])
-    assert path.exists()
-
-    path = find_root("")
-    assert path.exists()
-
-    path = find_root(".")
     assert path.exists()
 
     with pytest.raises(FileNotFoundError):

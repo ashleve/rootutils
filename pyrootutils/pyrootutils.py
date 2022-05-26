@@ -1,12 +1,12 @@
 import os
 import sys
 from pathlib import Path
-from typing import Iterable, Union
+from typing import Iterable, Optional, Union
 
 from dotenv import load_dotenv
 
 
-def _pyrootutils_recursive_search(path: Path, indicators: Iterable[str]) -> Path:
+def _pyrootutils_recursive_search(path: Path, indicators: Iterable[str]) -> Optional[Path]:
     """Recursively search for files from the `indicators` list, starting from given path.
 
     Args:
@@ -17,7 +17,7 @@ def _pyrootutils_recursive_search(path: Path, indicators: Iterable[str]) -> Path
         FileNotFoundError: if root is not found.
 
     Returns:
-        Path: path to folder containing at list one of the files from the list.
+        Optional[Path]: path to folder containing at list one of the files from the list.
     """
     for file in indicators:
         found = list(path.glob(file))
@@ -25,14 +25,20 @@ def _pyrootutils_recursive_search(path: Path, indicators: Iterable[str]) -> Path
             return path
 
     if path.parent == path:
-        raise FileNotFoundError("Project root directory not found.")
+        return None
 
     return _pyrootutils_recursive_search(path.parent, indicators)
 
 
 def find_root(
     search_from: Union[str, Path] = ".",
-    indicator: Union[str, Iterable[str]] = ".project-root",
+    indicator: Union[str, Iterable[str]] = (
+        ".project-root",
+        "setup.cfg",
+        "setup.py",
+        ".git",
+        "pyproject.toml",
+    ),
 ) -> Path:
     """Recursively searches for project root indicator(s), starting from given path.
 
@@ -63,8 +69,8 @@ def find_root(
 
     path = _pyrootutils_recursive_search(search_from, indicator)
 
-    if not path.exists():
-        raise FileNotFoundError("Project root directory not found.")
+    if not path or not path.exists():
+        raise FileNotFoundError(f"Project root directory not found. Indicators: {indicator}")
 
     return path
 
@@ -94,7 +100,7 @@ def set_root(
     path = str(path)
 
     if not os.path.exists(path):
-        raise FileNotFoundError("Project root path does not exist.")
+        raise FileNotFoundError(f"Project root path does not exist: {path}")
 
     if pythonpath:
         sys.path.insert(0, path)
@@ -111,7 +117,13 @@ def set_root(
 
 def setup_root(
     search_from: Union[str, Path],
-    indicator: Union[str, Iterable[str]] = ".project-root",
+    indicator: Union[str, Iterable[str]] = (
+        ".project-root",
+        "setup.cfg",
+        "setup.py",
+        ".git",
+        "pyproject.toml",
+    ),
     pythonpath: bool = True,
     cwd: bool = True,
     project_root_env_var: bool = True,

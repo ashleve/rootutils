@@ -6,9 +6,9 @@ with open("README.md") as f:
 
 setup(
     name="pyrootutils",
-    version="1.0.1",
+    version="1.0.2",
     license="MIT",
-    description="Simple package for setting up the root of the project.",
+    description="Simple package for easy project root setup",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/ashleve/pyrootutils",
