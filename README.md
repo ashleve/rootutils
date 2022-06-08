@@ -65,7 +65,7 @@ import pyrootutils
 # combines find_root() and set_root() into one method
 root = pyrootutils.setup_root(
     search_from=__file__,
-    indicator=".pyproject.toml"
+    indicator="pyproject.toml"
     project_root_env_var=True,
     dotenv=True,
     pythonpath=True,
