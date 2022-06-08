@@ -79,8 +79,8 @@ def set_root(
     path: Union[str, Path],
     project_root_env_var: bool = True,
     dotenv: bool = True,
-    pythonpath: bool = True,
-    cwd: bool = True,
+    pythonpath: bool = False,
+    cwd: bool = False,
 ) -> None:
     """Set given path as a project root.
 
@@ -126,8 +126,8 @@ def setup_root(
     ),
     project_root_env_var: bool = True,
     dotenv: bool = True,
-    pythonpath: bool = True,
-    cwd: bool = True,
+    pythonpath: bool = False,
+    cwd: bool = False,
 ) -> Path:
     """Combines `get_root()` and `set_root()` into one method.
 
