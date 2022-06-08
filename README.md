@@ -2,7 +2,7 @@
 
 [![Python](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/release/python-370/)
 [![Tests](https://github.com/ashleve/pyrootutils/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/ashleve/pyrootutils/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/ashleve/pyrootutils/branch/main/graph/badge.svg)](https://codecov.io/gh/ashleve/pyrootutils)
+[![Codecov](https://codecov.io/gh/ashleve/pyrootutils/branch/main/graph/badge.svg)](https://codecov.io/gh/ashleve/pyrootutils)
 [![Issues](https://img.shields.io/github/issues/ashleve/pyrootutils)](https://github.com/ashleve/pyrootutils/issues)
 [![License](https://img.shields.io/github/license/ashleve/pyrootutils)](https://github.com/ashleve/pyrootutils/blob/main/LICENSE)
 [![Release](https://img.shields.io/pypi/v/pyrootutils)](pypi.org/project/pyrootutils/1.0.0/)

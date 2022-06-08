@@ -77,19 +77,19 @@ def find_root(
 
 def set_root(
     path: Union[str, Path],
-    pythonpath: bool = True,
-    cwd: bool = True,
     project_root_env_var: bool = True,
     dotenv: bool = True,
+    pythonpath: bool = True,
+    cwd: bool = False,
 ) -> None:
     """Set given path as a project root.
 
     Args:
         path (Union[str, Path]): project root path.
-        pythonpath (bool, optional): whether to add project root to pythonpath.
-        cwd (bool, optional): whether to set current working directory to project root.
         project_root_env_var (bool, optional): whether to set PROJECT_ROOT environment variable to project root.
         dotenv (bool, optional): whether to load .env file from project root.
+        pythonpath (bool, optional): whether to add project root to pythonpath.
+        cwd (bool, optional): whether to set current working directory to project root.
 
     Raises:
         FileNotFoundError: if root path does not exist.
@@ -102,17 +102,17 @@ def set_root(
     if not os.path.exists(path):
         raise FileNotFoundError(f"Project root path does not exist: {path}")
 
-    if pythonpath:
-        sys.path.insert(0, path)
-
-    if cwd:
-        os.chdir(path)
-
     if project_root_env_var:
         os.environ["PROJECT_ROOT"] = path
 
     if dotenv:
         load_dotenv(os.path.join(path, ".env"))
+
+    if pythonpath:
+        sys.path.insert(0, path)
+
+    if cwd:
+        os.chdir(path)
 
 
 def setup_root(
@@ -124,20 +124,20 @@ def setup_root(
         ".git",
         "pyproject.toml",
     ),
-    pythonpath: bool = True,
-    cwd: bool = True,
     project_root_env_var: bool = True,
     dotenv: bool = True,
+    pythonpath: bool = True,
+    cwd: bool = False,
 ) -> Path:
     """Combines `get_root()` and `set_root()` into one method.
 
     Args:
         search_from (str): path to folder to start search from.
         indicator (Union[str, Iterable[str]], optional): Project root indicator(s). Defaults to ".project-root".
-        pythonpath (bool, optional): whether to add project root to pythonpath.
-        cwd (bool, optional): whether to set current working directory to project root.
         project_root_env_var (bool, optional): whether to set PROJECT_ROOT environment variable to project root.
         dotenv (bool, optional): whether to load .env file from project root.
+        pythonpath (bool, optional): whether to add project root to pythonpath.
+        cwd (bool, optional): whether to set current working directory to project root.
 
     Returns:
         Path: path to project root.

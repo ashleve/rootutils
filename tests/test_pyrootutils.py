@@ -64,12 +64,12 @@ def test_set_root():
 
     assert "PROJECT_ROOT" not in os.environ
 
-    set_root(path, pythonpath=False, cwd=False, project_root_env_var=True, dotenv=False)
+    set_root(path, project_root_env_var=True, dotenv=False, pythonpath=False, cwd=False)
     assert "PROJECT_ROOT" in os.environ
     assert os.environ["PROJECT_ROOT"] == str(path)
     assert os.getcwd() != str(path)
 
-    set_root(path, pythonpath=True, cwd=True, project_root_env_var=True, dotenv=True)
+    set_root(path, project_root_env_var=True, dotenv=True, pythonpath=True, cwd=True)
     assert os.getcwd() == str(path)
     assert str(path) in sys.path
 
