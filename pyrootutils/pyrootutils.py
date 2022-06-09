@@ -10,14 +10,14 @@ def _pyrootutils_recursive_search(path: Path, indicators: Iterable[str]) -> Opti
     """Recursively search for files from the `indicators` list, starting from given path.
 
     Args:
-        path (Path): starting folder path.
-        indicators (Iterable[str]): list of filenames to search for.
+        path (Path): Starting folder path.
+        indicators (Iterable[str]): List of filenames to search for.
 
     Raises:
-        FileNotFoundError: if root is not found.
+        FileNotFoundError: If root is not found.
 
     Returns:
-        Optional[Path]: path to folder containing at list one of the files from the list.
+        Optional[Path]: Path to folder containing at list one of the files from the list.
     """
     for file in indicators:
         found = list(path.glob(file))
@@ -43,15 +43,15 @@ def find_root(
     """Recursively searches for project root indicator(s), starting from given path.
 
     Args:
-        search_from (str): path to folder to start search from.
-        indicator (Union[str, Iterable[str]], optional): _description_. Defaults to ".project-root".
+        search_from (str): Path to folder or file to start search from.
+        indicator (Union[str, Iterable[str]], optional): List of filenames to search for. Finding at least one on these files indicates the project root. 
 
     Raises:
-        TypeError: if any input type is incorrect.
-        FileNotFoundError: if root is not found.
+        TypeError: If any input type is incorrect.
+        FileNotFoundError: If root is not found.
 
     Returns:
-        Path: path to project root.
+        Path: Path to project root.
     """
     if not isinstance(search_from, (str, Path)):
         raise TypeError("search_from must be either a string or pathlib object.")
@@ -85,14 +85,14 @@ def set_root(
     """Set given path as a project root.
 
     Args:
-        path (Union[str, Path]): project root path.
-        project_root_env_var (bool, optional): whether to set PROJECT_ROOT environment variable to project root.
-        dotenv (bool, optional): whether to load .env file from project root.
-        pythonpath (bool, optional): whether to add project root to pythonpath.
-        cwd (bool, optional): whether to set current working directory to project root.
+        path (Union[str, Path]): Project root path.
+        project_root_env_var (bool, optional): Whether to set PROJECT_ROOT environment variable.
+        dotenv (bool, optional): Whether to load `.env` file from project root.
+        pythonpath (bool, optional): Whether to add project root to pythonpath.
+        cwd (bool, optional): Whether to set current working directory to project root.
 
     Raises:
-        FileNotFoundError: if root path does not exist.
+        FileNotFoundError: If root path does not exist.
 
     Returns:
         None
@@ -130,17 +130,23 @@ def setup_root(
     cwd: bool = False,
 ) -> Path:
     """Combines `get_root()` and `set_root()` into one method.
+    
+    Recursively searches for files from the `indicators` list, starting from given path.
 
     Args:
-        search_from (str): path to folder to start search from.
-        indicator (Union[str, Iterable[str]], optional): Project root indicator(s). Defaults to ".project-root".
-        project_root_env_var (bool, optional): whether to set PROJECT_ROOT environment variable to project root.
-        dotenv (bool, optional): whether to load .env file from project root.
-        pythonpath (bool, optional): whether to add project root to pythonpath.
-        cwd (bool, optional): whether to set current working directory to project root.
-
+        search_from (str): Path to file or folder to start search from.
+        indicator (Union[str, Iterable[str]], optional): List of filenames to search for. Finding at least one on these files indicates the project root. 
+        project_root_env_var (bool, optional): Whether to set PROJECT_ROOT environment variable.
+        dotenv (bool, optional): Whether to load `.env` file from project root.
+        pythonpath (bool, optional): Whether to add project root to pythonpath.
+        cwd (bool, optional): Whether to set current working directory to project root.
+    
+    Raises:
+        TypeError: If any input type is incorrect.
+        FileNotFoundError: If root is not found.
+        
     Returns:
-        Path: path to project root.
+        Path: Path to project root.
     """
     path = find_root(search_from, indicator)
     set_root(
