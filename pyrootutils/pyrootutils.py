@@ -44,7 +44,7 @@ def find_root(
 
     Args:
         search_from (str): Path to folder or file to start search from.
-        indicator (Union[str, Iterable[str]], optional): List of filenames to search for. Finding at least one on these files indicates the project root. 
+        indicator (Union[str, Iterable[str]], optional): List of filenames to search for. Finding at least one on these files indicates the project root.
 
     Raises:
         TypeError: If any input type is incorrect.
@@ -130,21 +130,21 @@ def setup_root(
     cwd: bool = False,
 ) -> Path:
     """Combines `get_root()` and `set_root()` into one method.
-    
+
     Recursively searches for files from the `indicators` list, starting from given path.
 
     Args:
         search_from (str): Path to file or folder to start search from.
-        indicator (Union[str, Iterable[str]], optional): List of filenames to search for. Finding at least one on these files indicates the project root. 
+        indicator (Union[str, Iterable[str]], optional): List of filenames to search for. Finding at least one on these files indicates the project root.
         project_root_env_var (bool, optional): Whether to set PROJECT_ROOT environment variable.
         dotenv (bool, optional): Whether to load `.env` file from project root.
         pythonpath (bool, optional): Whether to add project root to pythonpath.
         cwd (bool, optional): Whether to set current working directory to project root.
-    
+
     Raises:
         TypeError: If any input type is incorrect.
         FileNotFoundError: If root is not found.
-        
+
     Returns:
         Path: Path to project root.
     """
