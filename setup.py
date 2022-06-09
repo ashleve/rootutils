@@ -6,7 +6,7 @@ with open("README.md") as f:
 
 setup(
     name="pyrootutils",
-    version="1.0.3",
+    version="1.0.4",
     license="MIT",
     description="Simple package for easy project root setup",
     long_description=long_description,
