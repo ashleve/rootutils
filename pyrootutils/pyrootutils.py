@@ -13,9 +13,6 @@ def _pyrootutils_recursive_search(path: Path, indicators: Iterable[str]) -> Opti
         path (Path): Starting folder path.
         indicators (Iterable[str]): List of filenames to search for.
 
-    Raises:
-        FileNotFoundError: If root is not found.
-
     Returns:
         Optional[Path]: Path to folder containing at list one of the files from the list.
     """
