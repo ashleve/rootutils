@@ -27,7 +27,7 @@ The package is tiny and continuosly maintained, so you can use it without worryi
 
 ## Setup
 
-```python
+```bash
 pip install pyrootutils
 ```
 
@@ -58,33 +58,22 @@ pyrootutils.set_root(
 )
 ```
 
-One-liner:
+Simplest usage with one-liner (combines `find_root()` and `set_root()` into one method):
 ```python
 import pyrootutils
-
-# combines find_root() and set_root() into one method
-root = pyrootutils.setup_root(
-    search_from=__file__,
-    indicator=[".git"]
-    project_root_env_var=True,
-    dotenv=True,
-    pythonpath=True,
-    cwd=True,
-)
+root = pyrootutils.setup_root(__file__, pythonpath=True)
 ```
 
-Simplest usage with default arguments:
+Default arguments:
 ```python
-# the defaults are:
-# indicator=[".project-root", "setup.cfg", "setup.py", ".git", "pyproject.toml"]
-# project_root_env_var=True
-# dotenv=True
-# pythonpath=False
-# cwd=False
-
-import pyrootutils
-
-root = pyrootutils.setup_root(__file__)
+root = pyrootutils.setup_root(
+    search_from=__file__,
+    indicator=[".project-root", "setup.cfg", "setup.py", ".git", "pyproject.toml"]
+    project_root_env_var=True,
+    dotenv=True,
+    pythonpath=False,
+    cwd=False,
+)
 ```
 
 ## Inspirations
@@ -96,5 +85,3 @@ https://github.com/chendaniely/pyprojroot
 https://github.com/pashminacameron/py-repo-root
 
 https://github.com/EduardKononov/from-root
-
-https://github.com/eddieantonio/project-paths
