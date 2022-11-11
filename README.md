@@ -23,7 +23,7 @@ A simple python package to solve all your problems with pythonpath, working dire
 
 **Solution:** The `pyrootutils` package provides a flexible way to setup the python project with a simple one-liner. It finds the project root based on the location of specified file name, e.g. `.project-root` or `.git`.
 
-The package is tiny and continuosly maintained, so you can use it without worrying it gets deprecated in the future.
+The package is tiny and continuosly maintained.
 
 ## Setup
 
@@ -61,19 +61,15 @@ pyrootutils.set_root(
 Simplest usage with one-liner (combines `find_root()` and `set_root()` into one method):
 ```python
 import pyrootutils
-root = pyrootutils.setup_root(__file__, pythonpath=True)
+root = pyrootutils.setup_root(__file__, dotenv=True, pythonpath=True, cwd=False)
 ```
 
-Default arguments:
+## Defaults
+
+Default root indicators (used when you don't specify `indicator` arg):
+
 ```python
-root = pyrootutils.setup_root(
-    search_from=__file__,
-    indicator=[".project-root", "setup.cfg", "setup.py", ".git", "pyproject.toml"]
-    project_root_env_var=True,
-    dotenv=True,
-    pythonpath=False,
-    cwd=False,
-)
+[".project-root", "setup.cfg", "setup.py", ".git", "pyproject.toml"]
 ```
 
 ## Inspirations
