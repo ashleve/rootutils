@@ -72,6 +72,29 @@ Default root indicators (used when you don't specify `indicator` arg):
 [".project-root", "setup.cfg", "setup.py", ".git", "pyproject.toml"]
 ```
 
+## Autoroot
+
+`autoroot` is an experimental package that reduces `pyrootutils` to single import, without the need to execute any setup calls. This means just the act of importing this dependency (`import autorootcwd`) causes execution of recurrent search for `.project-root` file.
+
+Installation:
+```bash
+pip install autoroot, autorootcwd
+```
+
+This adds root folder to pythonpath, sets PROJECT_ROOT env var, and loads variables from `.env`:
+```python 
+import autoroot # root setup, do not delete
+```
+
+This also changes working directory to root:
+```python
+import autorootcwd # root setup, do not delete
+```
+
+Autoroot exist just for convenience and speed. For example, it's faster to just add `import autorootcwd` at the beginning when creating new notebook.
+
+Package page: https://github.com/ashleve/autoroot
+
 ## Inspirations
 
 This package is heavily inspired by:
