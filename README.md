@@ -82,7 +82,7 @@ pip install autoroot, autorootcwd
 ```
 
 This adds root folder to pythonpath, sets PROJECT_ROOT env var, and loads variables from `.env`:
-```python 
+```python
 import autoroot # root setup, do not delete
 ```
 
@@ -91,7 +91,7 @@ This also changes working directory to root:
 import autorootcwd # root setup, do not delete
 ```
 
-Autoroot exist just for convenience and speed. For example, it's faster to just add `import autorootcwd` at the beginning when creating new notebook.
+Autoroot exist for convenience and speed. For example, it's faster to just add `import autorootcwd` at the beginning when creating new notebook.
 
 Package page: https://github.com/ashleve/autoroot
 
