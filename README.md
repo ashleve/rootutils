@@ -78,7 +78,7 @@ Default root indicators (used when you don't specify `indicator` arg):
 
 Installation:
 ```bash
-pip install autoroot, autorootcwd
+pip install autoroot autorootcwd
 ```
 
 This adds root folder to pythonpath, sets PROJECT_ROOT env var, and loads variables from `.env`:
