@@ -6,7 +6,7 @@ with open("README.md") as f:
 
 setup(
     name="rootutils",
-    version="1.0.5",
+    version="1.0.6",
     license="MIT",
     description="Simple package for easy project root setup",
     long_description=long_description,
