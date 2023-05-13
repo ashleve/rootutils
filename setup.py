@@ -5,13 +5,13 @@ with open("README.md") as f:
 
 
 setup(
-    name="pyrootutils",
-    version="1.0.4",
+    name="rootutils",
+    version="1.0.5",
     license="MIT",
     description="Simple package for easy project root setup",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/ashleve/pyrootutils",
+    url="https://github.com/ashleve/rootutils",
     author="ashleve",
     author_email="ashlevegalaxy@gmail.com",
     packages=find_packages(),

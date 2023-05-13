@@ -4,10 +4,10 @@ from pathlib import Path
 
 import pytest
 
-from pyrootutils import find_root, set_root, setup_root
+from rootutils import find_root, set_root, setup_root
 
 
-def test_pyrootutils():
+def test_rootutils():
     assert find_root
     assert set_root
     assert setup_root
@@ -55,7 +55,6 @@ def test_find_root():
 
 
 def test_set_root():
-
     path = find_root(__file__)
     assert path.exists()
 

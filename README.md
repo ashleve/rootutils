@@ -1,17 +1,17 @@
-# pyrootutils
+# rootutils
 
 [![Python](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/release/python-370/)
-[![Tests](https://github.com/ashleve/pyrootutils/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/ashleve/pyrootutils/actions/workflows/test.yml)
-[![Codecov](https://codecov.io/gh/ashleve/pyrootutils/branch/main/graph/badge.svg)](https://codecov.io/gh/ashleve/pyrootutils)
-[![Build](https://github.com/ashleve/pyrootutils/actions/workflows/publish_package.yml/badge.svg)](https://github.com/ashleve/pyrootutils/actions/workflows/publish_package.yml)
-[![Issues](https://img.shields.io/github/issues/ashleve/pyrootutils)](https://github.com/ashleve/pyrootutils/issues)
-[![License](https://img.shields.io/github/license/ashleve/pyrootutils)](https://github.com/ashleve/pyrootutils/blob/main/LICENSE)
-[![Release](https://img.shields.io/pypi/v/pyrootutils)](pypi.org/project/pyrootutils/1.0.0/)
-[![PyPi](https://img.shields.io/pypi/dm/pyrootutils)](pypi.org/project/pyrootutils/1.0.0/)
+[![Tests](https://github.com/ashleve/rootutils/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/ashleve/rootutils/actions/workflows/test.yml)
+[![Codecov](https://codecov.io/gh/ashleve/rootutils/branch/main/graph/badge.svg)](https://codecov.io/gh/ashleve/rootutils)
+[![Build](https://github.com/ashleve/rootutils/actions/workflows/publish_package.yml/badge.svg)](https://github.com/ashleve/rootutils/actions/workflows/publish_package.yml)
+[![Issues](https://img.shields.io/github/issues/ashleve/rootutils)](https://github.com/ashleve/rootutils/issues)
+[![License](https://img.shields.io/github/license/ashleve/rootutils)](https://github.com/ashleve/rootutils/blob/main/LICENSE)
+[![Release](https://img.shields.io/pypi/v/rootutils)](pypi.org/project/rootutils/1.0.5/)
+[![PyPi](https://img.shields.io/pypi/dm/rootutils)](pypi.org/project/rootutils/1.0.5/)
 
 A simple python package to solve all your problems with pythonpath, working directory, file paths, module imports and environment variables.
 
-## Why pyrootutils?
+## Why rootutils?
 
 **Problem:** I would like to be able to:
 
@@ -21,35 +21,35 @@ A simple python package to solve all your problems with pythonpath, working dire
 - Always have access to environment variables from `.env` file without having to load them manually
 - Have all the above benefits in notebooks even if they're nested in subdirectories
 
-**Solution:** The `pyrootutils` package provides a flexible way to setup the python project with a simple one-liner. It finds the project root based on the location of specified file name, e.g. `.project-root` or `.git`.
+**Solution:** The `rootutils` package provides a flexible way to setup the python project with a simple one-liner. It finds the project root based on the location of specified file name, e.g. `.project-root` or `.git`.
 
 The package is tiny and continuosly maintained.
 
 ## Setup
 
 ```bash
-pip install pyrootutils
+pip install rootutils
 ```
 
 ## Usage
 
 ```python
-import pyrootutils
+import rootutils
 
 # find absolute root path (searches for directory containing .project-root file)
 # search starts from current file and recursively goes over parent directories
 # returns pathlib object
-path = pyrootutils.find_root(search_from=__file__, indicator=".project-root")
+path = rootutils.find_root(search_from=__file__, indicator=".project-root")
 
 # find absolute root path (searches for directory containing any of the files on the list)
-path = pyrootutils.find_root(search_from=__file__, indicator=[".git", "setup.cfg"])
+path = rootutils.find_root(search_from=__file__, indicator=[".git", "setup.cfg"])
 
 # take advantage of the pathlib syntax
 data_dir = path / "data"
 assert data_dir.exists(), f"path doesn't exist: {data_dir}"
 
 # set root directory
-pyrootutils.set_root(
+rootutils.set_root(
     path=path # path to the root directory
     project_root_env_var=True, # set the PROJECT_ROOT environment variable to root directory
     dotenv=True, # load environment variables from .env if exists in root directory
@@ -60,8 +60,8 @@ pyrootutils.set_root(
 
 Simplest usage with one-liner (combines `find_root()` and `set_root()` into one method):
 ```python
-import pyrootutils
-root = pyrootutils.setup_root(__file__, dotenv=True, pythonpath=True, cwd=False)
+import rootutils
+root = rootutils.setup_root(__file__, dotenv=True, pythonpath=True, cwd=False)
 ```
 
 ## Defaults
@@ -74,7 +74,7 @@ Default root indicators (used when you don't specify `indicator` arg):
 
 ## Autoroot
 
-`autoroot` is an experimental package that reduces `pyrootutils` to single import, without the need to execute any setup calls. This means just the act of importing this dependency (`import autorootcwd`) causes execution of recurrent search for `.project-root` file.
+`autoroot` is an experimental package that reduces `rootutils` to single import, without the need to execute any setup calls. This means just the act of importing this dependency (`import autorootcwd`) causes execution of recurrent search for `.project-root` file.
 
 Installation:
 ```bash

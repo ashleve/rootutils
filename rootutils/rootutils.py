@@ -6,7 +6,7 @@ from typing import Iterable, Optional, Union
 from dotenv import load_dotenv
 
 
-def _pyrootutils_recursive_search(path: Path, indicators: Iterable[str]) -> Optional[Path]:
+def _rootutils_recursive_search(path: Path, indicators: Iterable[str]) -> Optional[Path]:
     """Recursively search for files from the `indicators` list, starting from given path.
 
     Args:
@@ -24,7 +24,7 @@ def _pyrootutils_recursive_search(path: Path, indicators: Iterable[str]) -> Opti
     if path.parent == path:
         return None
 
-    return _pyrootutils_recursive_search(path.parent, indicators)
+    return _rootutils_recursive_search(path.parent, indicators)
 
 
 def find_root(
@@ -64,7 +64,7 @@ def find_root(
     if not hasattr(indicator, "__iter__") or not all(isinstance(i, str) for i in indicator):
         raise TypeError("indicator must be a string or list of strings.")
 
-    path = _pyrootutils_recursive_search(search_from, indicator)
+    path = _rootutils_recursive_search(search_from, indicator)
 
     if not path or not path.exists():
         raise FileNotFoundError(f"Project root directory not found. Indicators: {indicator}")
