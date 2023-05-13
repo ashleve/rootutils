@@ -6,8 +6,8 @@
 [![Build](https://github.com/ashleve/rootutils/actions/workflows/publish_package.yml/badge.svg)](https://github.com/ashleve/rootutils/actions/workflows/publish_package.yml)
 [![Issues](https://img.shields.io/github/issues/ashleve/rootutils)](https://github.com/ashleve/rootutils/issues)
 [![License](https://img.shields.io/github/license/ashleve/rootutils)](https://github.com/ashleve/rootutils/blob/main/LICENSE)
-[![Release](https://img.shields.io/pypi/v/rootutils)](pypi.org/project/rootutils/1.0.5/)
-[![PyPi](https://img.shields.io/pypi/dm/rootutils)](pypi.org/project/rootutils/1.0.5/)
+[![Release](https://img.shields.io/pypi/v/rootutils)](https://pypi.org/project/rootutils/)
+[![PyPi](https://img.shields.io/pypi/dm/rootutils)](https://pypi.org/project/rootutils/)
 
 A simple python package to solve all your problems with pythonpath, working directory, file paths, module imports and environment variables.
 
