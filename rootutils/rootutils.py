@@ -156,7 +156,13 @@ def setup_root(
     return path
 
 
-def autosetup(indicator=".project-root", project_root_env_var=True, dotenv=True, pythonpath=True, cwd=False) -> Path:
+def autosetup(
+    indicator=".project-root",
+    project_root_env_var=True,
+    dotenv=True,
+    pythonpath=True,
+    cwd=False,
+) -> Path:
     """Experimental method for less friction. Automatically inferrs `search_from` path."""
 
     # this line finds the absolute path of the original python script that is being run
